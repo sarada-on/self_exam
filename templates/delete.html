@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block head_extra %}
+{% endblock %}
+{% block content %}
+<main class="container-medium">
+	<nav>
+		<ul>
+			<li><strong>Exam Delete</strong></li>
+		</ul>		
+		<ul>
+			<li><a href="/" class="contrast">Home</a></li>
+			<li><a href="/upload" class="contrast">Upload</a></a></li>			
+			<li><a href="/logout" class="contrast">Logout</a></a></li>
+		</ul>
+	</nav>
+	<section>
+		<article>
+			<div class="overflow-auto">
+				<table id="sortableTable" class="striped">
+					<thead data-theme="dark">
+						<tr>					
+							<th scope="col" class="th_sort_header" onclick="sortTable(0)">파일명 <span class="sort-icon"></span></th>
+							<th scope="col" class="th_sort_header" onclick="sortTable(1)">문제 수 <span class="sort-icon"></span></th>
+							<th scope="col" class="th_sort_header" onclick="sortTable(2)">생성자 <span class="sort-icon"></span></th>
+							<th scope="col" class="th_sort_header" onclick="sortTable(3)">생성일시 <span class="sort-icon"></span></th>
+							<th scope="col">삭제</td>
+						</tr>
+					</thead>			
+					<tbody>
+					{% for file in files %}
+						<tr>
+							<th scope="row"><a href="{{ url_for('download_exam', exam_type=file.name, media_type='txt') }}" target="_blank" data-tooltip="다운로드">{{ file.name }}</a></td>
+							<td>{{ file.question_count }}</td>
+							<td>{{ file.user_name or '' }}</td>
+							<td>{{ file.created }}</td>
+							<td><button class="outline contrast" onClick="deleteFile('{{ file.name }}')">삭제</button></td>
+						</tr>
+					{% endfor %}
+					</tbody>
+				</table> 
+			</div>
+		</article>
+	</section>
+</main>
+{% endblock %}
+{% block scripts %}<script src="{{ url_for('static', filename='script_delete.js') }}"></script>{% endblock %}
