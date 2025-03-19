@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content %}
+<main class="container-medium">
+	<nav>
+		<ul>
+			<li><strong><span id="exam-title"></span></strong></li>
+		</ul>
+		<ul>
+			<li><a href="/" class="contrast">Home</a></li>
+			<li><a href="/logout" class="contrast">Logout</a></a></li>
+		</ul>
+	</nav>
+	<section>
+		<article>
+			<header>
+				<hgroup style="text-align:center">
+					<h5 id="progress" class="progress"></h5>
+				</hgroup>
+			</header>
+				<div id="loading-screen" class="loading-area" style="padding-top:100px; padding-bottom:100px">
+					<span id="loading_text" aria-busy="true">Please wait...</span>
+				</div>
+				<div id="question-container" class="question-container"></div>
+				<div id="answer-feedback" class="answer-feedback"></div>
+			<footer>
+				<div role="group">
+					<button id="submit" disabled>정답 확인</button>
+					<button id="next" class="secondary" disabled>다음 문제</button>
+				</div>
+			</footer>    
+		</article>
+	</section>
+</main>
+{% endblock %}
+{% block scripts %}<script src="{{ url_for('static', filename='script_exam.js') }}"></script>{% endblock %}
