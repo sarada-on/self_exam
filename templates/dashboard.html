@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block content %}
+<main class="container-medium">
+	<nav>
+		<ul>
+			<li><strong>Available Exams</strong></li>
+		</ul>		
+		<ul>
+			<li><a href="/upload" class="contrast">Upload</a></a></li>
+			<li><a href="/delete" class="contrast">Delete</a></a></li>
+			<li><a href="/logout" class="contrast">Logout</a></a></li>
+		</ul>
+	</nav>
+	<section>
+		<article>
+			<header>
+				<hgroup style="text-valign:center">
+					<h5>
+					{% if session['user']['picture'] %}
+						<img class="round-image" src="{{ session['user']['picture'] }}" alt="">
+					{% endif %}
+					Hello, {{ session['user']['name'] }}</h5>
+				</hgroup>
+			</header>
+				<ul class="files-list">
+			{% for file in files %}
+				<li><a href="{{ url_for('index', exam_type=file.name) }}">
+				<div class="grid">
+					<div>{{ file.name }}</div>
+					<div>{{ file.question_count }}개 문항</div>
+				</div>
+				</a></li>
+			{% endfor %}
+			</ul>  
+		</article>
+	</section>
+</main>
+{% endblock %}
